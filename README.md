@@ -1,2 +1,7 @@
-# update-banner-job
-Simple Script to update the banner on the Quay web interface
+# Update Banner
+
+This script updates the Banner on Quay.io using the App-Sre interface. If a banner already exists, this script remove it adds the new banner
+
+
+
+

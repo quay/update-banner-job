@@ -1,0 +1,77 @@
+---
+apiVersion: v1
+kind: Template
+metadata:
+  name: quayio-update-banner-job
+parameters:
+- name: DB_SECRET
+  value: "quayio-stage-57-rds"
+  required: true
+- name:  MESSAGE
+  value: ""
+  required: true
+- name:  SEVERITY
+  value: ""
+  required: true
+- name: IMAGE
+  value: "quay.io/app-sre/quayio-update-banner-job"
+  required: true
+- name: IMAGE_TAG
+  value: ""
+  required: true
+- name: ACTIVE_DEADLINE_SECONDS
+  value: "600"
+  required: true
+- name: JOB_NAME
+  value: ""
+  required: true
+objects:
+- apiVersion: batch/v1
+  kind: Job
+  metadata:
+    name: quayio-update-banner-${JOB_NAME}
+  spec:
+    template:
+      metadata:
+        labels:
+          app: quayio-update-banner-${JOB_NAME}
+      spec:
+        activeDeadlineSeconds: ${{ACTIVE_DEADLINE_SECONDS}}
+        backoffLimit: 1
+        completions: 1
+        parallelism: 1
+        restartPolicy: Never
+        containers:
+        - name: quayio-update-banner-${JOB_NAME}
+          image: ${IMAGE}:${IMAGE_TAG}
+          resources:
+            limits:
+              cpu: 100m
+              memory: 128Mi
+            requests:
+              cpu: 100m
+              memory: 128Mi
+          env:
+          - name: DB_HOST
+            valueFrom:
+              secretKeyRef:
+                name: ${{DB_SECRET}}
+                key: db.host
+          - name: DB_USER
+            valueFrom:
+              secretKeyRef:
+                name: ${{DB_SECRET}}
+                key: db.user
+          - name: DB_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: ${{DB_SECRET}}
+                key: db.password
+          - name: DB_NAME
+            valueFrom:
+              secretKeyRef:
+                name: ${{DB_SECRET}}
+                key: db.name
+          - name: MESSAGE
+            value: ${{MESSAGE}}
+           
