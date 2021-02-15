@@ -73,5 +73,4 @@ objects:
                 name: ${{DB_SECRET}}
                 key: db.name
           - name: MESSAGE
-            value: ${{MESSAGE}}
-           
+            value: ${MESSAGE}
