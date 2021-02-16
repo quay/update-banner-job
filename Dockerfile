@@ -1,4 +1,4 @@
-FROM python
+FROM quay.io/bitnami/python
 
 RUN pip install pymysql
 
