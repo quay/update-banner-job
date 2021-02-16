@@ -7,7 +7,7 @@ set -exv
 CURRENT_DIR=$(dirname $0)
 
 BASE_IMG="quayio-update-banner-job"
-QUAY_IMAGE="quay.io/app-sre/${BASE_IMG}"
+QUAY_IMAGE="quay.io/quay/${BASE_IMG}"
 IMG="${BASE_IMG}:latest"
 
 GIT_HASH=`git rev-parse --short=7 HEAD`

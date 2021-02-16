@@ -15,7 +15,7 @@ def update_banner():
 
     try:
         with conn.cursor() as cur:
-            cur.execute('DELETE FROM messages where 1=1')
+            cur.execute('DELETE FROM messages WHERE 1=1')
             cur.execute('INSERT INTO messages (content) VALUES (%s)', (MESSAGE))
 
         conn.commit()
