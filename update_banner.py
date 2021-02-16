@@ -2,8 +2,10 @@ import os
 import pymysql
 
 
-conn = pymysql.connect(os.environ.get('DB_HOST'), os.environ.get('DB_USER'),
-    os.environ.get('DB_PASSWORD'), os.environ.get('DB_NAME'))
+conn = pymysql.connect(host=os.environ.get('DB_HOST'),
+            user=os.environ.get('DB_USER'),
+            password=os.environ.get('DB_PASSWORD'),
+            db=os.environ.get('DB_NAME'))
 
 MESSAGE = os.environ.get('MESSAGE')
 
