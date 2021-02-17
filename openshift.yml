@@ -4,8 +4,17 @@ kind: Template
 metadata:
   name: quayio-update-banner-job
 parameters:
-- name: DB_SECRET
-  value: "quayio-stage-57-rds"
+- name: DB_HOST
+  value: "localhost"
+  required: true
+- name: DB_USER
+  value: "quay"
+  required: true
+- name: DB_PASSWORD
+  value: "password"
+  required: true
+- name: DB_NAME
+  value: "quay"
   required: true
 - name:  MESSAGE
   value: ""
@@ -53,24 +62,12 @@ objects:
               memory: 128Mi
           env:
           - name: DB_HOST
-            valueFrom:
-              secretKeyRef:
-                name: ${{DB_SECRET}}
-                key: db.host
+            value: ${DB_HOST}
           - name: DB_USER
-            valueFrom:
-              secretKeyRef:
-                name: ${{DB_SECRET}}
-                key: db.user
+            value: ${DB_USER}
           - name: DB_PASSWORD
-            valueFrom:
-              secretKeyRef:
-                name: ${{DB_SECRET}}
-                key: db.password
+            value: ${DB_PASSWORD}
           - name: DB_NAME
-            valueFrom:
-              secretKeyRef:
-                name: ${{DB_SECRET}}
-                key: db.name
+            value: ${DB_NAME}
           - name: MESSAGE
             value: ${MESSAGE}
