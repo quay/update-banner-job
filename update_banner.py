@@ -1,6 +1,7 @@
 import os
 import pymysql
 from urllib.parse import unquote
+import traceback
 
 password_decoded = unquote(os.environ.get('DB_PASSWORD'))
 
@@ -23,6 +24,10 @@ def update_banner():
             cur.execute('INSERT INTO messages (content) VALUES (%s)', (MESSAGE))
 
         conn.commit()
+    except Exception as e:
+        print("ERROR: Unable to change the banner")
+        print(e)
+        traceback.print_exc()
     finally:
         conn.close()
 
