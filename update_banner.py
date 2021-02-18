@@ -1,10 +1,12 @@
 import os
 import pymysql
+from urllib.parse import unquote
 
+password_decoded = unquote(os.environ.get('DB_PASSWORD'))
 
 conn = pymysql.connect(host=os.environ.get('DB_HOST'),
             user=os.environ.get('DB_USER'),
-            password=os.environ.get('DB_PASSWORD'),
+            password=password_decoded,
             db=os.environ.get('DB_NAME'))
 
 MESSAGE = os.environ.get('MESSAGE')
