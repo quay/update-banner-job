@@ -15,13 +15,11 @@ MESSAGE = os.environ.get('MESSAGE')
 
 
 def update_banner():
-    if not MESSAGE:
-        return
-
     try:
         with conn.cursor() as cur:
             cur.execute('DELETE FROM messages WHERE 1=1')
-            cur.execute('INSERT INTO messages (content) VALUES (%s)', (MESSAGE))
+            if MESSAGE:
+                cur.execute('INSERT INTO messages (content) VALUES (%s)', (MESSAGE))
 
         conn.commit()
     except Exception as e:
