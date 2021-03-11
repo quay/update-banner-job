@@ -12,7 +12,7 @@ parameters:
   required: true
 - name:  MESSAGE
   value: ""
-  required: true
+  required: false
 - name:  SEVERITY
   value: ""
   required: true
