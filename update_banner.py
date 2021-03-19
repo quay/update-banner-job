@@ -25,7 +25,7 @@ def update_banner():
                 result = cur.fetchone()
                 media_type_id = int(result['id'])
 
-                cur.execute('INSERT INTO messages (content, media_type_id, severity) VALUES (%s, %d, %s)', (MESSAGE, media_type_id, SEVERITY))
+                cur.execute('INSERT INTO messages (content, media_type_id, severity) VALUES (%s, %s, %s)', (MESSAGE, media_type_id, SEVERITY))
 
         conn.commit()
     except Exception as e:
