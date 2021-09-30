@@ -10,8 +10,8 @@ parameters:
 - name: DB_CREDS_SECRET
   value: "quayio-stage-57-rds"
   required: true
-- name:  MESSAGE
-  value: ""
+- name:  MESSAGES
+  value: "[]"
   required: false
 - name:  SEVERITY
   value: ""
@@ -75,5 +75,5 @@ objects:
               secretKeyRef:
                 name: ${{DB_CREDS_SECRET}}
                 key: db.name
-          - name: MESSAGE
-            value: ${MESSAGE}
+          - name: MESSAGES
+            value: ${MESSAGES}
