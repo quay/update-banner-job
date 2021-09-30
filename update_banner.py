@@ -23,6 +23,10 @@ def update_banner():
 
     try:
         with conn.cursor() as cur:
+            cur.execute("SELECT id from mediatype WHERE name='text/markdown'")
+            result = cur.fetchone()
+            media_type_id = int(result['id'])
+
             cur.execute('DELETE FROM messages WHERE 1=1')
             for message in MESSAGES:
                 cur.execute('INSERT INTO messages (content, media_type_id, severity) VALUES (%s, %s, %s)', (message, media_type_id, SEVERITY))
