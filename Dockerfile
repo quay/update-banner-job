@@ -1,4 +1,4 @@
-FROM quay.io/bitnami/python
+FROM registry.access.redhat.com/ubi8/python-39:latest
 
 RUN pip install pymysql
 
